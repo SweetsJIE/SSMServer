@@ -3,8 +3,10 @@
 <mapper namespace="com.demo.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.demo.bean.User">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="CHAR" property="name" />
-    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="speed" jdbcType="VARCHAR" property="speed" />
+    <result column="power" jdbcType="VARCHAR" property="power" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, password
+    id, speed, power, latitude, longitude
   </sql>
   <select id="selectByExample" parameterType="com.demo.bean.UserExample" resultMap="BaseResultMap">
     select
@@ -73,7 +75,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from vehicle
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,65 +86,85 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from vehicle
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from vehicle
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.demo.bean.UserExample">
-    delete from user
+    delete from vehicle
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.demo.bean.User">
-    insert into user (id, name, password)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{password,jdbcType=CHAR})
+    insert into vehicle (id, speed, power, 
+      latitude, longitude)
+    values (#{id,jdbcType=INTEGER}, #{speed,jdbcType=VARCHAR}, #{power,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.demo.bean.User">
-    insert into user
+    insert into vehicle
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="speed != null">
+        speed,
       </if>
-      <if test="password != null">
-        password,
+      <if test="power != null">
+        power,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=CHAR},
+      <if test="speed != null">
+        #{speed,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=CHAR},
+      <if test="power != null">
+        #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.demo.bean.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+    select count(*) from vehicle
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update vehicle
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=CHAR},
+      <if test="record.speed != null">
+        speed = #{record.speed,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=CHAR},
+      <if test="record.power != null">
+        power = #{record.power,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null">
+        latitude = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        longitude = #{record.longitude,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -150,30 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update vehicle
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=CHAR},
-      password = #{record.password,jdbcType=CHAR}
+      speed = #{record.speed,jdbcType=VARCHAR},
+      power = #{record.power,jdbcType=VARCHAR},
+      latitude = #{record.latitude,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.demo.bean.User">
-    update user
+    update vehicle
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=CHAR},
+      <if test="speed != null">
+        speed = #{speed,jdbcType=VARCHAR},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=CHAR},
+      <if test="power != null">
+        power = #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.demo.bean.User">
-    update user
-    set name = #{name,jdbcType=CHAR},
-      password = #{password,jdbcType=CHAR}
+    update vehicle
+    set speed = #{speed,jdbcType=VARCHAR},
+      power = #{power,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

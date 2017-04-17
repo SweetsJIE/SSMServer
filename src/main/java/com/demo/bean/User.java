@@ -3,9 +3,13 @@ package com.demo.bean;
 public class User {
     private Integer id;
 
-    private String name;
+    private String speed;
 
-    private String password;
+    private String power;
+
+    private String latitude;
+
+    private String longitude;
 
     public Integer getId() {
         return id;
@@ -15,19 +19,36 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSpeed() {
+        return speed;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setSpeed(String speed) {
+        this.speed = speed == null ? null : speed.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getPower() {
+        return power;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setPower(String power) {
+        this.power = power == null ? null : power.trim();
     }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude == null ? null : latitude.trim();
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude == null ? null : longitude.trim();
+    }
+
 }
